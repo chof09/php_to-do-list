@@ -2,6 +2,7 @@
 
 	require_once 'init.php';
 
+// SORT ITEMS
 	if (isset($_POST['sort-items'])) {
 		$sort = $_POST['sort-items'];
 	} else {
@@ -24,9 +25,13 @@
 
 	}
 
-		$items = $itemsQuery->num_rows ? $itemsQuery : [];
+	$items = $itemsQuery->num_rows ? $itemsQuery : [];
 
-	
+	$edit_form = "<form action='update.php' class='edit-item' method='post'>"
+					."<input type='text' name='edit-item-field' id='edit-field'>"
+					."<input type='hidden' name='id-to-edit' id='edit-hidden'>"
+					."<input type='submit' value='Save' class='submit-change-btn'>"
+				."</form>";
 
 ?>
 
@@ -41,6 +46,29 @@
 		<title>PHP Playground</title>
 
 		<link rel="stylesheet" type="text/css"  href="style.css" media="all" />
+
+		<script>
+
+		function edit(counter, id) {
+			var oldValue = document.getElementById(counter).innerHTML;
+			document.getElementById(counter).innerHTML = "<?php echo $edit_form; ?>";
+			document.getElementById("edit-field").value = oldValue;
+			document.getElementById("edit-hidden").value = id;
+			document.getElementById("edit-field").focus();
+			document.getElementById("edit-btn" + counter).innerHTML = "";
+		};
+
+		function show_edit_btn(number) {
+			var editId = "edit-btn" + number;
+			document.getElementById(editId).style.display = "inline";
+		};
+
+		function hide_edit_btn(number) {
+			var editId = "edit-btn" + number;
+			document.getElementById(editId).style.display = "none";
+		};
+
+		</script>
 
 	</head>
 
@@ -63,9 +91,9 @@
 
 			<?php if (!empty($items)): ?>
 
-				<?php foreach ($items as $item): ?>
+				<?php foreach ($items as $counter=>$item): ?>
 
-					<div class="to-do-item<?php echo $item['done'] ? ' done' : ''; ?>">
+					<div class="to-do-item<?php echo $item['done'] ? ' done' : ''; ?>" onmouseover="show_edit_btn('<?php echo $counter; ?>')" onmouseout="hide_edit_btn('<?php echo $counter; ?>')">
 
 					<?php
 						switch($item['done']) {
@@ -78,10 +106,11 @@
 								$markAs = 'Undone!';
 								break;
 						}
+
 					?>
 
-						<div class="to-do-text">
-							<p><?php echo $item['value']; ?></p>
+						<div class="to-do-text" id="item-text">
+							<p> <span id="<?php echo $counter; ?>"><?php echo $item['value']; ?></span> <span id="edit-btn<?php echo $counter; ?>"><a href="javascript:void(0);" onclick="edit('<?php echo $counter; ?>', '<?php echo $item['id']; ?>')" class="edit-btn">Edit</a></span></p>
 						</div>
 
 						<div class="to-do-controls">
