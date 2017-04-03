@@ -33,6 +33,11 @@
 					."<input type='submit' value='Save' class='submit-change-btn'>"
 				."</form>";
 
+	$isDone = array(
+			0 => array('done', 'Done!'),
+			1 => array('notdone', 'Undone!')
+		);
+
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +48,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
-		<title>PHP Playground</title>
+		<title>PHP To-Do list</title>
 
 		<link rel="stylesheet" type="text/css"  href="style.css" media="all" />
 
@@ -93,21 +98,9 @@
 
 				<?php foreach ($items as $counter=>$item): ?>
 
+					<?php $itemDone = $item['done']; ?>
+
 					<div class="to-do-item<?php echo $item['done'] ? ' done' : ''; ?>" onmouseover="show_edit_btn('<?php echo $counter; ?>')" onmouseout="hide_edit_btn('<?php echo $counter; ?>')">
-
-					<?php
-						switch($item['done']) {
-							case 0:
-								$done = 'done';
-								$markAs = 'Done!';
-								break;
-							case 1:
-								$done = 'notdone';
-								$markAs = 'Undone!';
-								break;
-						}
-
-					?>
 
 						<div class="to-do-text" id="item-text">
 							<p> <span id="<?php echo $counter; ?>"><?php echo $item['value']; ?></span> <span id="edit-btn<?php echo $counter; ?>"><a href="javascript:void(0);" onclick="edit('<?php echo $counter; ?>', '<?php echo $item['id']; ?>')" class="edit-btn">Edit</a></span></p>
@@ -116,11 +109,11 @@
 						<div class="to-do-controls">
 
 							<div class="to-do-completed">
-								<a href="mark.php?as=<?php echo $done; ?>&item=<?php echo $item['id']; ?>" class="btn done"><?php echo $markAs; ?></a>
+								<a href="mark.php?as=<?php echo $isDone[$itemDone][0]; ?>&item=<?php echo $item['id']; ?>" class="btn done"><?php echo $isDone[$itemDone][1]; ?></a>
 							</div>
 
 							<div class="to-do-remove">
-								<a href="mark.php?as=remove&item=<?php echo $item['id']; ?>" class="btn remove" onclick="return confirm('Are you sure you want to delete this item?')">X</a> 
+								<a href="remove.php?item=<?php echo $item['id']; ?>" class="btn remove" onclick="return confirm('Are you sure you want to delete this item?')">X</a> 
 							</div>
 
 						</div>
