@@ -1,13 +1,19 @@
 <?php
 
+	session_start();
+
 	require_once 'init.php';
 
 // SORT ITEMS
 	if (isset($_POST['sort-items'])) {
-		$sort = $_POST['sort-items'];
+		$_SESSION['sorty'] = $_POST['sort-items'];
+	} else if (isset($_SESSION['sorty'])) {
+		$_SESSION['sorty'] = $_SESSION['sorty'];
 	} else {
-		$sort = '';
+		$_SESSION['sorty'] = '';
 	}
+
+	$sort = $_SESSION['sorty'];
 
 	switch ($sort) {
 
@@ -56,12 +62,12 @@
 
 			<div class="section">
 
-				<form class="sort-item" action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+				<form class="sort-item" id="sort-form" action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
-					<select name="sort-items" onchange="this.form.submit()">
-						<option value="default" <?php echo ($sort === 'default') ? 'selected' : ''; ?>>Show all</option>
-						<option value="done" <?php echo ($sort === 'done') ? 'selected' : ''; ?>>Show done tasks</option>
-						<option value="not-done" <?php echo ($sort === 'not-done') ? 'selected' : ''; ?>>Show undone tasks</option>
+					<select name="sort-items" id="sort">
+						<option class="sort-option" value="default" <?php echo ($sort === 'default') ? 'selected' : ''; ?>>Show all</option>
+						<option class="sort-option" value="done" <?php echo ($sort === 'done') ? 'selected' : ''; ?>>Show done tasks</option>
+						<option class="sort-option" value="not-done" <?php echo ($sort === 'not-done') ? 'selected' : ''; ?>>Show undone tasks</option>
 					</select>
 
 				</form>

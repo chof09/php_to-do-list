@@ -37,3 +37,22 @@ function hide_edit_btn(counter) {
 		document.getElementById(editId).style.display = "none";
 	};
 };
+
+window.onload = function() {
+	var form = document.getElementById("sort");
+	form.onchange = function() {
+		var f = document.getElementById("sort-form");
+		f.submit();
+	};
+};
+
+// window.onload = function() {
+// 	var option = document.getElementsByClassName("sort-option");
+// 	var i;
+// 	for (i = 0; i < option.length; i++) {
+// 		option[i].onclick = function() {
+// 			var form = document.getElementById("sort-form");
+// 			form.submit();
+// 		};
+// 	};
+// };
