@@ -45,14 +45,3 @@ window.onload = function() {
 		f.submit();
 	};
 };
-
-// window.onload = function() {
-// 	var option = document.getElementsByClassName("sort-option");
-// 	var i;
-// 	for (i = 0; i < option.length; i++) {
-// 		option[i].onclick = function() {
-// 			var form = document.getElementById("sort-form");
-// 			form.submit();
-// 		};
-// 	};
-// };

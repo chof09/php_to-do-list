@@ -5,9 +5,7 @@
 	require_once 'init.php';
 
 // SORT ITEMS
-	if (isset($_POST['sort-items'])) {
-		$_SESSION['sorty'] = $_POST['sort-items'];
-	} else if (isset($_SESSION['sorty'])) {
+	if (isset($_SESSION['sorty'])) {
 		$_SESSION['sorty'] = $_SESSION['sorty'];
 	} else {
 		$_SESSION['sorty'] = '';
@@ -62,7 +60,7 @@
 
 			<div class="section">
 
-				<form class="sort-item" id="sort-form" action="<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+				<form class="sort-item" id="sort-form" action="sort.php" method="post">
 
 					<select name="sort-items" id="sort">
 						<option class="sort-option" value="default" <?php echo ($sort === 'default') ? 'selected' : ''; ?>>Show all</option>
