@@ -5,9 +5,7 @@
 	require_once 'init.php';
 
 // SORT ITEMS
-	if (isset($_SESSION['sorty'])) {
-		$_SESSION['sorty'] = $_SESSION['sorty'];
-	} else {
+	if (!isset($_SESSION['sorty'])) {
 		$_SESSION['sorty'] = '';
 	}
 
