@@ -117,11 +117,6 @@ input[type="submit"] {
 	background-color: #de3b3b;
 }
 
-.not-active {
-   pointer-events: none;
-   cursor: default;
-}
-
 #edit-field {
 	background-color: transparent;
 	border: none;

@@ -44,4 +44,13 @@ window.onload = function() {
 		var f = document.getElementById("sort-form");
 		f.submit();
 	};
+
+	// umjesto edit funkcije i pozivanja onclicka u index.php
+
+	// var edits = document.GetElementsByClassName('edit-btn');
+	// for (var i = 0; i < edits.length; i++) {
+	//     edits[i].addEventListener('click', function(){
+	//     	console.log(this)
+	//     });
+	// }
 };
