@@ -11,7 +11,7 @@ if (isset($_POST['new-item'])) {
 
 	if (!empty($newItem)) {
 		$stmt = $connection->prepare("INSERT INTO items (value, done) VALUES (?, ?)");
-		$stmt->bind_param("ss", $newItem, $zero);
+		$stmt->bind_param("si", $newItem, $zero);
 		$stmt->execute();
 	}
 
